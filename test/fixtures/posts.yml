@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  collegeid: MyString
+  : MyString
+  name: MyString
+  : MyString
+  dept: MyString
+  : MyString
+  type: 
+  : MyString
+  course: MyString
+  : MyString
+  phone: MyString
+  : 
+  Address: MyString
+  : 
+
+two:
+  collegeid: MyString
+  : MyString
+  name: MyString
+  : MyString
+  dept: MyString
+  : MyString
+  type: 
+  : MyString
+  course: MyString
+  : MyString
+  phone: MyString
+  : 
+  Address: MyString
+  : 

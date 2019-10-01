@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>VIBHAV</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Instyle Fashion HTML Template">
+	<meta name="keywords" content="instyle, fashion, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Favicon -->
+	<link href="assets/favicon.ico" rel="shortcut icon"/>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/owl.carousel.min.css"/>
+	<link rel="stylesheet" href="css/slicknav.min.css"/>
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+
+	<!-- header section -->
+	<header class="header-section">
+		<div class="header-warp">
+			<%= link_to image_tag("logo.png"), home_path %>
+			<ul class="main-menu">
+				<li><%= link_to 'home',home_path%></li>
+				<li><%= link_to 'admin',admin_path%></li>
+				<li><%= link_to 'signup',signup_path%></li>
+				<li><%= link_to 'login',login_path%></li>
+				<!--<li><%= link_to 'booking',booking_path%></li>
+				<li><%= link_to 'cancel',cancel_path%></li>-->
+			</ul>
+		</div>
+	</header>
+	<!-- header section end -->
+	<%= render 'flash_messages' %>
+	<center><h3>Registration Form</h3></center><br>
+	<!-- forms--> 
+<div align="center">
+	<%= form_with scope: :post, local: true, url:'/register' do |form| %>
+	<% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h3>
+        <%= pluralize(@post.errors.count, "error") %> Errors
+      </h3>
+      <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <b>College_id </b>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= form.text_field :collegeid %>
+  </p>
+ <p>
+    <b>Full_Name </b>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= form.text_field :name %>
+  </p>
+  <p><b>Password </b>
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<%= form.password_field :password %> 
+  </p>
+  <p>
+    <b>Dept_Name </b>
+    &nbsp;&nbsp;&nbsp;
+    <%= form.text_field :dept %>
+  </p>
+  
+  <p>
+  	<b>Type</b>
+  	&nbsp;
+  	<%= radio_button_tag(:type, "student") %>
+	<%= label_tag(:type_student, "Student  ") %>
+	<%= radio_button_tag(:type, "faculty") %>
+	<%= label_tag(:type_faculty, "Faculty") %>
+  </p>
+  <p>
+    <b>Course/Duty</b>
+    &nbsp;
+    <%= form.text_field :course %>
+  </p>
+  <p>
+    <b>Phone </b>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= form.text_field :phone %>
+  </p>
+  </p>
+  <p>
+    <b>Address</b>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= form.text_area :address %>
+  </p>
+    <%= form.submit 'Submit'%>
+  </p>
+</p>
+<% end %>
+</div>
+	<!--end -->
+	<!--====== Javascripts & Jquery ======-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.slicknav.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/circle-progress.min.js"></script>
+	<script src="js/main.js"></script>
+
+
+
+	</body>
+</html>
