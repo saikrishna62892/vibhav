@@ -17,11 +17,39 @@
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/owl.carousel.min.css"/>
 	<link rel="stylesheet" href="css/slicknav.min.css"/>
 
 	<!-- Main Stylesheets -->
 	<link rel="stylesheet" href="css/style.css"/>
+	<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+ 
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+</style>
 
 </head>
 <body>
@@ -33,6 +61,7 @@
 			<%= link_to image_tag("logo.png"), home_path %>
 			<ul class="main-menu">
 				<li><%= link_to 'home',home_path%></li>
+				<!--<li><%= link_to 'add',add_path%></li>-->
 				<li><%= link_to 'status',status_path%></li>
 				<li><%= link_to 'blacklist',blacklist_path%></li>
 				<li><%= link_to 'logout','admin/logout'%></li>
@@ -41,10 +70,79 @@
 		</div>
 	</header>
 	<!-- header section end -->
-	<%= render 'flash_messages' %>
 	
-
-
+	
+<div class="row">
+  <div class="column">
+  	<%= render 'flash_messages' %>
+    <h4><center>Add Vegetables</center></h4>
+    <br>
+    <div align="center">
+	<%= form_with scope: :vegetable, local: true, url:'/add_veg' do |form| %>
+	<% if @vegetable.errors.any? %>
+    <div id="error_explanation">
+      <h3>
+        <%= pluralize(@vegetable.errors.count, "error") %> Errors
+      </h3>
+      <ul>
+        <% @vegetable.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <b>Veg_name </b>
+    &nbsp;&nbsp;&nbsp;
+    <%= form.text_field :veg_name %>
+</p>
+<p>
+    <b>Quantity </b>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= form.text_field :quantity %>
+</p>
+<p>
+    <b>Price </b>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= form.text_field :price %>
+</p>
+    <%= form.submit 'Submit'%>
+  </p>
+</p>
+<% end %>
+</div>
+  </div>
+  <div class="column">
+    <h4><center>Avail_List</center></h4>
+    <br>
+    <div class="container">            
+  <table class="table table-striped">
+    <thead>
+      <tr align="center">
+      	<th>Id</th>
+        <th align="center">Veg_name</th>
+        <th align="center">Quantiy</th>
+        <th align="center">Price (/Kg)</th>
+        <th align="center"> Options</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<% Vegetable.all.each do |veg| %>
+     	 <tr>
+     	 	<td align="center"><%= veg.id %></td>
+    	<td align="center"><%= veg.veg_name%></td>
+    	<td align="center"><%= veg.quantity %></td>
+    	<td align="center"><i class="fa fa-inr"></i>&nbsp;<%= veg.price %></td>
+    	<!--<td align="center"><%= link_to 'Edit',edit_path(veg)%>&nbsp;&nbsp;&nbsp;<%= link_to 'Delete',delete_path(veg),method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>-->
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<!--Table Listing-->
+  </div>
+</div>
   
 	
 	<!--====== Javascripts & Jquery ======-->

@@ -1,11 +1,23 @@
 class PostsController < ApplicationController
 	add_flash_types :danger,:info, :success,:warning
+	before_action :confirm_logged_in, :except =>[:index,:forgot_collegeid,:forgot,:signup,:show,:login,:attempt_ulogin,:logout,:validate,:register,:forgot_form]
 	def index
 		@users= Post.all
 	end
-	def forgot_collegeid
+	def forgot
+
+		
 	end
-	def forgot_password
+	def forgot_form
+		@mail = forgotparams[:email]
+		@fuser = Post.where(:email => @mail).first
+		if @fuser==nil
+			redirect_to forgot_path, danger: "Email_id not found in users list!!"
+		else
+			UserMailer.forgot(@fuser).deliver_now
+			redirect_to login_path, info: "Check your email for login credentials"
+		end
+
 	end
 	def signup
 		 @post = Post.new
@@ -32,7 +44,7 @@ class PostsController < ApplicationController
       # TODO: mark user as logged in
       session[:user_id]=authorized_user.id
       session[:collegeid]=authorized_user.collegeid
-      redirect_to  booking_path,success: "You are now logged in!!"
+      redirect_to  booking_path,success: "You are now logged in & present in booking section!!"
     else
       redirect_to login_path, danger: "Invalid Login Credentials!!"
     end
@@ -46,37 +58,43 @@ class PostsController < ApplicationController
 	def cancel
 
 	end
-	def validate
-		@validate=validateparams[:cid]	
-		#@record=Post.find_by collegeid: @validate
-		render plain:@validate.inspect
-		#render plain:@record.inspect
-		##if @validate.collegeid==college
-		#	redirect_to order_path
-		#else
-		#	redirect_to signup_path, danger: "Invalid Credentials Registration Required!!"
-		#end
-	end
-	def order
-	end
+	
 	def register
 		@post=Post.new(regparams)
-		 if @post.save
+		if @post.password==@post.confirm_password
+			if @post.save
     		redirect_to @post
-  		else
+  			else
+   				render 'signup'
+   			end
+   		else
+   			flash[:danger] = "password & confirm_password doesn't match!!"
    			render 'signup'
    		end
+
 	end
 	
 	private
 	def regparams
-		params.require(:post).permit(:collegeid, :name, :dept, :type, :course, :phone, :address, :password)
+		params.require(:post).permit(:collegeid, :name, :dept, :type, :course, :phone, :address, :password,:email,:confirm_password)
 	end
 	def validateparams
 		params.require(:valid).permit(:cid)
 	end
 	def uloginparams
 		params.require(:ulogin).permit(:collegeid,:password)
+	end
+	def forgotparams
+		params.require(:forgot).permit(:email)
+	end
+	private
+	def confirm_logged_in
+		unless session[:user_id]
+			redirect_to home_path, warning: "Please Login!!"
+			return false
+		else
+			return true
+		end
 	end
 end
 

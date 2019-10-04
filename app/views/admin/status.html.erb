@@ -40,6 +40,7 @@
 			<ul class="main-menu">
 				<li><%= link_to 'home',home_path%></li>
 				<li><%= link_to 'add',add_path%></li>
+				<!--<li><%= link_to 'status','/status'%></li>-->
 				<li><%= link_to 'blacklist',blacklist_path%></li>
 				<li><%= link_to 'logout','admin/logout'%></li>
 			</ul>
@@ -53,11 +54,8 @@
       <tr>
         <th>Collegeid</th>
         <th>Name</th>
-        <th>Department</th>
-        <th>Course/Duty</th>
         <th>Phone</th>
         <th>Address</th>
-        <th>Password</th>
       </tr>
     </thead>
     <tbody>
@@ -65,11 +63,8 @@
      	 <tr>
     	<td><%= user.collegeid %></td>
     	<td><%= user.name %></td>
-    	<td><%= user.dept %></td>
-   		<td><%= user.course %></td>
     	<td><%= user.phone %></td>
     	<td><%= user.address%></td>
-    	<td><%= user.password_digest%></td>
       </tr>
       <% end %>
     </tbody>
