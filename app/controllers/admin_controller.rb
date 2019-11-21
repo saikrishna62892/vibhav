@@ -68,7 +68,7 @@ class AdminController < ApplicationController
     username=adminparams[:adminid]
     password=adminparams[:password]
     if username.present? && password.present?
-      found_user = Admin.where(:adminid => username).first
+      found_user = Admin.find_by(:adminid => username)
      if found_user
         authorized_user = found_user.authenticate(adminparams[:password])
       end
