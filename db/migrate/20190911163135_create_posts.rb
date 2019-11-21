@@ -8,7 +8,9 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.string :course
       t.string :phone
       t.string :address
-      
+      t.string :email
+      t.string :password_digest
+      t.string :confirm_password
       t.timestamps
     end
   end
