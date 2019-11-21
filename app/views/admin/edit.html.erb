@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -31,24 +32,60 @@
 </head>
 <body>
 
+
 	<!-- header section -->
 	<header class="header-section">
 		<div class="header-warp">
 			<%= link_to image_tag("logo.png"), home_path %>
 			<ul class="main-menu">
 				<li><%= link_to 'home',home_path%></li>
-				<li><%= link_to 'signup',signup_path%></li>
-				<li><%= link_to 'booking',booking_path%></li>
-				<!--<li><%= link_to 'cancel',cancel_path%></li>-->
-				<li><%= link_to 'logout',logout_path%></li>
-				
+				<li><%= link_to 'logout','admin/logout'%></li>
+				<!--<li><%= link_to 'booking',booking_path%></li>
+				<li><%= link_to 'cancel',cancel_path%></li>-->
 			</ul>
 		</div>
 	</header>
 	<!-- header section end -->
 	<%= render 'flash_messages' %>
 	
+	<h4><center>Edit Vegetable</center></h4>
+    <br>
+    <div align="center">
+	<%= form_with model: @edit, local: true do |form| %>
+	<% if @edit.errors.any? %>
+    <div id="error_explanation">
+      <h3>
+        <%= pluralize(@edit.errors.count, "error") %> Errors
+      </h3>
+      <ul>
+        <% @edit.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 	
+  <p>
+    <b>Veg_name </b>
+    &nbsp;&nbsp;&nbsp;
+    <%= form.text_field :veg_name %>
+</p>
+<p>
+    <b>Quantity </b>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= form.text_field :quantity %>
+</p>
+<p>
+    <b>Price </b>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= form.text_field :price %>
+</p>
+    <%= form.submit 'Submit'%>
+  </p>
+</p>
+<% end %>
+
+  
 	
 	<!--====== Javascripts & Jquery ======-->
 	<script src="js/jquery-3.2.1.min.js"></script>

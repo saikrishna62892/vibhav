@@ -1,0 +1,36 @@
+<h2>Booking Details</h2>
+
+<p>
+Hello <%= @user.name %>,
+</p>
+<p>Thank you for Ordering and we will reach you soon!!</p>
+<p>Booking time : <%= Time.now %></p>
+<p>Order Details   : </p>
+<div class="container">            
+  <table class="table table-striped">
+    <thead>
+      <tr align="center">
+        <th align="center">Veg_name</th>
+        <th align="center">Quantiy</th>
+        <th align="center">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<% @order_user = Booking.where(:colege_id => @user.collegeid) %> 
+    	<% @order_user.all.each do |veg| %>
+     	 <tr>
+    	<td align="center"><%= veg.veg_name%></td>
+    	<td align="center"><%quan = " Kg's" %><%= veg.quantity.to_s+quan %></td>
+    	<td align="center"><% currency = "Rs."%><%= currency+veg.price.to_s %></td>
+      	</tr>
+      	<% end %>
+    </tbody>
+  </table>
+</div>
+<!--Table Listing-->
+<div>  
+	<h5>Total Price : <% currency = "Rs."%><%= currency+@total_price.to_s %></h5>
+<p>Click here to <%= link_to "login", 'http://localhost:3000/login' %></p>
+</div>
+<p align>Thankyou</p>
+<p align>-Vibhav-</p>

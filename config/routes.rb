@@ -9,9 +9,16 @@ Rails.application.routes.draw do
    get '/cancel' => 'posts#cancel', as: 'cancel'
    get '/logout' => 'posts#logout', as: 'logout'
    get '/status' => 'admin#status', as: 'status'
+   get '/status_done/:id' => 'admin#status_done', as: 'status_done'
+    get 'closeshop' => 'admin#closeshop', as: 'closeshop'
+   get '/bookingdelete/:id' => 'posts#bookingdelete', as: 'bookingdelete'
    get '/blacklist' => 'admin#blacklist', as: 'blacklist'
-   get '/edit'=>'admin#edit' ,as: 'edit'
-   get '/delete'=>'admin#delete' ,as: 'delete'
+   get '/reg_users' => 'admin#reg_users', as: 'reg_users'
+   get '/user_remove/:id' => 'admin#user_remove', as: 'user_remove'
+   get '/patch/:id'=>'admin#patch' ,as: 'patch'
+   get '/edit/:id'=>'admin#edit' ,as: 'edit'
+   patch '/vegetables/:id'=>'admin#update',as: 'vegetable'
+   delete '/delete/:id'=>'admin#delete' ,as: 'delete'
    get '/register' => 'posts#register'
    post '/register' => 'posts#register'
    post '/order' => 'posts#order'
@@ -23,7 +30,10 @@ Rails.application.routes.draw do
    post '/forgot_form' => 'posts#forgot_form'
    get '/forgot' => 'posts#forgot'
    post '/add_veg' => 'admin#add_veg'
+   post '/book_veg' => 'posts#book_veg'
+   get '/confirm' => 'posts#confirm'
    resources :posts
-   resources :vegetables
+   
+   #resources :vegetables
    match ':controller(/:action(/:id(.:format)))', :via => [:get,:post]
 end

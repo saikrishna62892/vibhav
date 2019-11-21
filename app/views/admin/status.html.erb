@@ -39,6 +39,7 @@
 			<%= link_to image_tag("logo.png"), home_path %>
 			<ul class="main-menu">
 				<li><%= link_to 'home',home_path%></li>
+				<li><%= link_to 'users',reg_users_path%></li>
 				<li><%= link_to 'add',add_path%></li>
 				<!--<li><%= link_to 'status','/status'%></li>-->
 				<li><%= link_to 'blacklist',blacklist_path%></li>
@@ -47,30 +48,49 @@
 		</div>
 	</header>
 	<!-- header section end -->
+	<%= render 'flash_messages' %>
 <div class="container">
-  <center><h3><b>Users List</b></h3></center><br>            
+	<h5># Orders : <%= Booking.all.count%></h5><br>
+	<h5># Users : <%= Booking.select(:colege_id).distinct.count%></h5>
+  <center><h3><b>Order's List</b></h3></center><br>            
   <table class="table table-striped">
     <thead>
-      <tr>
-        <th>Collegeid</th>
-        <th>Name</th>
-        <th>Phone</th>
-        <th>Address</th>
+      <tr align="center">
+      	<th> S.no</th>
+      	<th>College Id</th>
+      	<th>Name</th>
+        <th>Vegitable Name</th>
+        <th>Quantity</th>
+        <th>Price(Rs)</th>
+        <th>Booked At</th>
+        <th>Delivery</th>
       </tr>
     </thead>
     <tbody>
-    	<% Post.all.each do |user| %>
-     	 <tr>
-    	<td><%= user.collegeid %></td>
-    	<td><%= user.name %></td>
-    	<td><%= user.phone %></td>
-    	<td><%= user.address%></td>
+    	<% s_no=1 %>
+    	<% temp = Booking.all.order("name ASC") %>
+    	<% temp.each do |user| %>
+     	 <tr align="center">
+     	 <td><%= s_no %></td>
+     	<td><%= user.colege_id %></td> 	
+     	<td><%= user.name %></td>
+    	<td><%= user.veg_name %></td>
+    	<td><%= user.quantity %></td>
+    	<td align="center"><% currency = "Rs."%><%= currency+user.price.to_s %></td>
+    	<td><%= user.updated_at %></td>
+    	<td><%= link_to 'Delivered?',status_done_path(user) ,
+              data: { confirm: 'Are you sure?' } %></td>
+              <% s_no = s_no +1 %>
       </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 <!--Table Listing-->
+<section>
+	 <button type="button" class="btn btn-primar btn-block" style="border: black"><%= link_to 'Close the Shop',closeshop_path() ,
+  data: { confirm: 'Are you sure?' } %></button>
+</section>
 
 
 

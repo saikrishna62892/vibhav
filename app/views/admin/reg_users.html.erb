@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -16,71 +17,67 @@
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/owl.carousel.min.css"/>
 	<link rel="stylesheet" href="css/slicknav.min.css"/>
 
 	<!-- Main Stylesheets -->
 	<link rel="stylesheet" href="css/style.css"/>
-<!-- listing table -->
-	
-
 </head>
 <body>
+
+
 	<!-- header section -->
 	<header class="header-section">
 		<div class="header-warp">
 			<%= link_to image_tag("logo.png"), home_path %>
 			<ul class="main-menu">
 				<li><%= link_to 'home',home_path%></li>
-				<li><%= link_to 'admin',admin_path%></li>
-				<li><%= link_to 'signup',signup_path%></li>
-				<li><%= link_to 'login',login_path%></li>
-				<!--<li><%= link_to 'booking',booking_path%></li>
-				<li><%= link_to 'cancel',cancel_path%></li>-->
+       <!-- <li><%= link_to 'users',reg_users_path%></li>-->
+				<li><%= link_to 'add',add_path%></li>
+				<li><%= link_to 'status',status_path%></li>
+				<li><%= link_to 'blacklist',blacklist_path%></li>
+				<li><%= link_to 'logout','admin/logout'%></li>
+				
 			</ul>
 		</div>
 	</header>
-	<!-- header section end -->	
-	<%= render 'flash_messages' %>
-  <div class="centered" align="center">
-  	<h4 >Cilck on</h4>
-  	<button onclick="location.href = '/login';" type="button" class="btn btn-link" style><h1 >Order Now !</h1></button><h4 > to Order Vegetables</h4><br>
-  	
-  	<h5>"To get the best results you must talk to your vegetables."</h5><h5  align="center">- Prince Charles</h4>
-  </div>
-  <br>
-  <!-- listing table-->
-  <h4 align="center"> List of Vegetables Available for Booking</h4>   
-	 <br>
-    <div class="container">            
+	<!-- header section end -->
+	
+	
+<%= render 'flash_messages' %>
+<div class="container">
+  <center><h3><b>Order's List</b></h3></center><br>            
   <table class="table table-striped">
     <thead>
       <tr align="center">
-      	<th align="center">S.no</th>
-        <th align="center">Veg_name</th>
-        <th align="center">Quantiy available</th>
-        <th align="center">Price (/Kg)</th>
+        <th>S.no</th>
+        <th>College Id</th>
+        <th>Name</th>
+        <th>Email-id</th>
+        <th>Phone</th>
+        <th>Address</th>
       </tr>
     </thead>
     <tbody>
-    	<% s_no =1 %>
-    	<% @temp = Vegetable.all.order("veg_name ASC")%>
-    	<% @temp.each do |veg| %>
-     	 <tr>
-     	 <td align="center"><%= s_no %></td>
-    	<td align="center"><%= veg.veg_name%></td>
-    	<td align="center"><%quan = " Kg's" %><%= veg.quantity.to_s+quan %></td>
-    	<td align="center"><% currency = "Rs."%><%= currency+veg.price.to_s %></td>
-    	<% s_no=s_no+1 %>
+      <% s_no=1 %>
+      <% @users.each do |user| %>
+       <tr align="center">
+        <td><%= s_no %></td>
+      <td><%= user.collegeid %></td>  
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.phone %></td>
+      <td><%= user.address %></td>
+      <% s_no = s_no+1 %>
       </tr>
       <% end %>
     </tbody>
   </table>
-</div>        
-
-</div> 
-
-
+</div>
+<!--Table Listing-->
+  
+	
 	<!--====== Javascripts & Jquery ======-->
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -88,6 +85,7 @@
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/circle-progress.min.js"></script>
 	<script src="js/main.js"></script>
+
 
 
 	</body>

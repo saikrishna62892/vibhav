@@ -10,11 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_04_052157) do
+ActiveRecord::Schema.define(version: 2019_10_09_121250) do
 
   create_table "admins", force: :cascade do |t|
     t.string "adminid"
     t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "blacklists", force: :cascade do |t|
+    t.string "colege_id"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.string "colege_id"
+    t.string "name"
+    t.string "phone"
+    t.string "address"
+    t.string "veg_name"
+    t.string "quantity"
+    t.string "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
