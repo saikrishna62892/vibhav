@@ -8,7 +8,7 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.string :course
       t.string :phone
       t.string :address
-
+      
       t.timestamps
     end
   end
